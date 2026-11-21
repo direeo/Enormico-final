@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Enormico</title>
+  <link rel="stylesheet" href="signIn.css" />
+  <link rel="stylesheet" href="app-theme.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="login-container">
+    <aside class="auth-brand">
+      <a class="auth-wordmark" href="landing.html">ENORMICO<span>.</span></a>
+      <div class="auth-brand-copy"><p>POOLED INVESTING</p><h1>Build your investing habit, one pool at a time.</h1></div>
+      <img src="enormino.jpeg" alt="Illustration of investment growth" />
+    </aside>
+    <section class="auth-form-panel">
+      <p class="auth-kicker">WELCOME BACK</p>
+      <h2>Sign in to Enormico</h2>
+      <p class="auth-description">Your portfolio is ready when you are.</p>
+      <form id="loginForm">
+      <label for="username">Username or email</label>
+      <input type="text" id="username" autocomplete="username" placeholder="Username or email" required />
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Password" required />
+      <p class="error-message" id="loginError"></p>
+      <button type="submit">Sign in <span aria-hidden="true">→</span></button>
+      </form>
+
+      <p class="register-link">New to Enormico? <a href="register.html">Create an account</a></p>
+      <p class="register-link"><a href="reset-password.html">Forgot password?</a></p>
+    </section>
+  </div>
+
+  <script src="client.js"></script>
+  <script src="signIn.js"></script>
+</body>
+</html>

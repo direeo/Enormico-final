@@ -1,0 +1,30 @@
+:root { --ink: #302b3d; --muted: #716b7c; --brand: #5f27cd; --line: #e7e1f0; --wash: #f7f4fc; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; padding: 28px 16px; color: var(--ink); background: var(--wash); font-family: 'Segoe UI', sans-serif; }
+.container { max-width: 760px; margin: auto; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 12px 34px rgba(56, 32, 94, .07); }
+h1 { margin: 6px 0 18px; color: var(--brand); font-size: 28px; }
+h2 { margin: 0; font-size: 20px; }
+.wallet-line { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; color: var(--muted); }
+.wallet-line strong { color: var(--ink); }
+a { color: var(--brand); }
+label { display: block; margin: 18px 0 6px; font-weight: 650; }
+select, input { width: 100%; min-height: 44px; padding: 10px 12px; color: var(--ink); background: #fff; border: 1px solid #cfc6dc; border-radius: 5px; font: inherit; }
+select:focus, input:focus { outline: 3px solid #e8dfff; border-color: var(--brand); }
+.summary { min-height: 52px; margin: 12px 0; padding: 12px; background: #faf9fc; border: 1px solid var(--line); line-height: 1.5; }
+.pool-note, .muted { color: var(--muted); font-size: 13px; }
+button { min-height: 42px; padding: 10px 16px; color: #fff; background: var(--brand); border: 0; border-radius: 5px; font: inherit; font-weight: 600; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .48; }
+.secondary-button { min-height: 36px; color: var(--brand); background: #f1ecfa; }
+.pool-section { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
+.section-heading { display: flex; justify-content: space-between; align-items: center; }
+.pool-list { display: grid; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+.pool-row { padding: 14px; border: 1px solid var(--line); border-radius: 6px; }
+.pool-row > div:first-child, .pool-facts { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 7px 16px; }
+.pool-row span, .pool-row small { color: var(--muted); }
+.pool-track { height: 8px; margin: 12px 0; overflow: hidden; background: #eeeaf4; border-radius: 99px; }
+.pool-track span { display: block; height: 100%; background: #5f27cd; }
+.message { padding: 10px 12px; background: #edf7ef; border-radius: 4px; }
+.message.error { color: #9a2626; background: #fff0f0; }
+.back-home-container { margin: 26px 0 0; text-align: center; }
+.back-home-btn { color: var(--brand); text-decoration: none; }
+@media (max-width: 560px) { body { padding: 12px; } .container { padding: 18px; } h1 { font-size: 23px; } .wallet-line { align-items: flex-start; flex-direction: column; } }

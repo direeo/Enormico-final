@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invest | Enormico</title>
+  <link rel="stylesheet" href="plans.css" />
+  <link rel="stylesheet" href="app-theme.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <a class="page-wordmark" href="home.html">ENORMICO<span>.</span></a>
+      <nav><a href="dashboard.html">Portfolio</a><a href="home.html">Home</a></nav>
+    </header>
+    <div class="plan-layout">
+      <section class="plan-builder">
+        <p class="eyebrow">INVESTMENT PLANS</p>
+        <h1>Choose a tier.<br />Join a pool.</h1>
+        <p class="section-intro">Your return is based on your contribution. The duration begins when the pool is full.</p>
+        <p class="wallet-line"><span>Available balance</span><strong id="availableBalance">Loading...</strong><a href="dashboard.html">Add funds <span aria-hidden="true">↗</span></a></p>
+
+        <label for="planSelect">Investment tier</label>
+        <select id="planSelect" required>
+          <option value="" selected disabled>Loading tiers...</option>
+        </select>
+
+        <label for="amount">Your contribution (NGN)</label>
+        <input type="number" id="amount" min="1" step="1" placeholder="Enter whole naira" class="large-input" />
+        <div class="summary" id="estimate" aria-live="polite">Choose a tier and enter an amount to view your estimated return.</div>
+
+        <label for="poolSelect">Choose a forming pool</label>
+        <select id="poolSelect">
+          <option value="">Automatically choose or create a forming pool</option>
+        </select>
+        <p id="actionMessage" class="message" role="status" hidden></p>
+        <button id="investButton" type="button" disabled>Invest from wallet <span aria-hidden="true">→</span></button>
+        <p class="pool-note">Pool targets are set per tier. A contribution may take a pool over its target and activate it.</p>
+      </section>
+
+      <aside class="pool-section" aria-labelledby="poolHeading">
+        <div class="section-heading">
+          <div><p class="eyebrow">LIVE ACTIVITY</p><h2 id="poolHeading">Open pools</h2></div>
+          <button id="refreshPools" class="secondary-button" type="button" aria-label="Refresh open pools" title="Refresh">↻</button>
+        </div>
+        <ul id="poolList" class="pool-list"><li>Loading pools...</li></ul>
+      </aside>
+    </div>
+
+    <footer class="page-footer"><span>ENORMICO</span><span>Simulation only · No real funds are accepted or paid out</span></footer>
+  </main>
+  <script src="client.js"></script>
+  <script src="plans.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin | Enormico</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="app-theme.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="admin-header">
+    <div><p class="eyebrow">ENORMICO · OPERATIONS</p><h1>Platform overview</h1><p class="admin-disclosure">Financial activity and balances are simulated.</p></div>
+    <nav><a href="dashboard.html">Dashboard</a><button id="logoutButton" type="button">Log out</button></nav>
+  </header>
+  <main>
+    <p id="adminMessage" class="message" role="status" hidden></p>
+    <section><h2>Platform totals</h2><div id="stats" class="stats-grid"><p>Loading...</p></div></section>
+    <section><h2>Investment tiers</h2><div class="table-wrap"><table><thead><tr><th>ROI</th><th>Range</th><th>Duration</th><th>Pool target</th><th>Active</th><th>Save</th></tr></thead><tbody id="plans"></tbody></table></div></section>
+    <section><h2>Users</h2><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Created</th></tr></thead><tbody id="users"></tbody></table></div></section>
+    <section><h2>Pools</h2><div class="table-wrap"><table><thead><tr><th>Pool</th><th>Tier</th><th>Status</th><th>Total / target</th><th>Investors</th><th>Dates</th></tr></thead><tbody id="pools"></tbody></table></div></section>
+    <section><h2>Investments</h2><div class="table-wrap"><table><thead><tr><th>ID</th><th>User</th><th>Tier</th><th>Contribution</th><th>Status</th><th>Dates</th></tr></thead><tbody id="investments"></tbody></table></div></section>
+    <section><h2>Transactions</h2><div class="table-wrap"><table><thead><tr><th>ID</th><th>User</th><th>Type</th><th>Direction</th><th>Amount</th><th>Status</th><th>Created</th></tr></thead><tbody id="transactions"></tbody></table></div></section>
+  </main>
+  <script src="client.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

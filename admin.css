@@ -1,0 +1,23 @@
+:root { color-scheme: light; --ink: #262336; --muted: #716d7e; --brand: #5f27cd; --line: #e8e4f0; --surface: #fff; --wash: #f6f3fb; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--wash); color: var(--ink); font-family: 'Segoe UI', sans-serif; }
+.admin-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px max(24px, calc((100vw - 1440px) / 2)); background: #fff; border-bottom: 1px solid var(--line); }
+.admin-header h1, h2 { margin: 4px 0 0; }
+.admin-header nav { display: flex; gap: 18px; align-items: center; }
+a { color: var(--brand); }
+button { border: 0; border-radius: 6px; padding: 10px 14px; color: #fff; background: var(--brand); font: inherit; cursor: pointer; }
+main { max-width: 1440px; margin: auto; padding: 24px; }
+section { margin: 20px 0 32px; }
+.eyebrow { margin: 0; color: var(--brand); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px; }
+.stats-grid article { display: grid; gap: 8px; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.stats-grid span { color: var(--muted); font-size: 13px; }
+.stats-grid strong { font-size: 19px; }
+.table-wrap { overflow-x: auto; margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; font-size: 14px; }
+th { color: var(--muted); font-weight: 600; background: #fbfaff; }
+td input[type=number] { width: 150px; padding: 8px; border: 1px solid var(--line); border-radius: 4px; }
+.message { padding: 12px; background: #efeafa; border-radius: 4px; }
+.message.error { color: #a02626; background: #fff0f0; }
+@media (max-width: 640px) { .admin-header { align-items: flex-start; flex-direction: column; padding: 18px; } main { padding: 16px; } }

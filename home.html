@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Enormico</title>
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="app-theme.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="home.html">ENORMICO<span>.</span></a>
+    <nav id="navMenu">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li class="dropdown">
+          <a href="plans.html">Plans</a>
+          <ul class="dropdown-menu">
+            <li><a href="plans.html">View investment tiers</a></li>
+          </ul>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="admin.html" id="adminLink" hidden>Admin</a></li>
+        <li><a href="#" id="logoutLink">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <div class="hero-text">
+      <p class="hero-kicker">ENORMICO · POOLED INVESTING</p>
+      <h1>Invest together.<br /><em>See every step.</em></h1>
+      <p class="welcome-line">Welcome back, <strong id="userName">Investor</strong></p>
+      <p class="hero-description">Explore investment tiers, track pool progress, and follow your portfolio from contribution to maturity.</p>
+      <div class="hero-actions"><a href="plans.html" class="cta-button">Explore investment tiers <span aria-hidden="true">→</span></a><a href="dashboard.html" class="dashboard-link">Open portfolio</a></div>
+    </div>
+    <div class="hero-img">
+      <img src="enormino.jpeg" alt="Illustration representing investment growth" />
+      <p>POOL PROGRESS<br /><span>Shared momentum. Individual returns.</span></p>
+    </div>
+  </main>
+
+  <script src="client.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>
