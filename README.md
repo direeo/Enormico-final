@@ -6,10 +6,12 @@ Enormico is a web-based pooled-investing simulation for user testing. It does no
 
 - Node.js 22.5 or newer
 - npm
+- A PostgreSQL database (Neon is supported)
 
 ```powershell
 npm ci
 Copy-Item .env.example .env
+# Set DATABASE_URL and SMTP settings in .env
 npm start
 ```
 
@@ -23,6 +25,6 @@ npm test
 
 ## Deployment
 
-The repository includes a Render Blueprint in [`render.yaml`](./render.yaml). It configures a Node web service, a persistent disk for SQLite, and a health check. Follow [`SETUP.md`](./SETUP.md) for deployment, environment variables, smoke checks, and operational limits.
+The app is configured for Vercel with Neon Postgres. Follow [`SETUP.md`](./SETUP.md) for project setup, environment variables, cron processing, and smoke checks.
 
-Never commit `.env`, database files, or real user data. The local SQLite database is excluded by `.gitignore`.
+Never commit `.env`, database credentials, or real user data.

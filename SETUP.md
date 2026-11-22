@@ -4,19 +4,21 @@ Enormico runs simulated investment activity only. It is not connected to a real 
 
 ## Requirements
 
-- Node.js 22.5 or newer (the application uses Node's built-in `node:sqlite` module)
+- Node.js 22.5 or newer
 - npm
+- A PostgreSQL database such as Neon
 
 ## Run locally
 
 ```powershell
 npm install
+Copy-Item .env.example .env
 npm start
 ```
 
-Open <http://localhost:3001>. Do not open the HTML files directly; the pages use same-origin authenticated API calls. The server initializes or upgrades `users.db` and seeds the five existing tiers. Existing account rows are retained; legacy plaintext passwords are converted to scrypt hashes on server startup and cleared from the old column.
+Set `DATABASE_URL` in `.env` to a PostgreSQL connection string before starting. Open <http://localhost:3001>. Do not open the HTML files directly; the pages use same-origin authenticated API calls. The server initializes the schema and seeds the five tiers on first start.
 
-For a disposable database, set `DB_FILE` before starting the server. The application does not automatically seed a wallet balance. Sign in and use **Add funds** in the wallet.
+The application does not automatically seed a wallet balance. Sign in and use **Add funds** in the wallet; all balances remain simulated.
 
 ## Email verification and password reset
 
@@ -32,7 +34,7 @@ To bootstrap an administrator on first start, set both `ENORMICO_ADMIN_EMAIL` an
 
 The existing tiers retain their rates, ranges, and durations. A tier's initial pool target is its existing maximum; an administrator can adjust that target from the protected monitor. Pools expire after 14 days. A contribution that takes a pool to or above its target is accepted in full and activates the pool. ROI uses each investment's own total contribution and is rounded to the nearest whole naira. Maturity duration is measured as exact 24-hour days from pool activation.
 
-The server processes expiries and maturities on startup and once per minute. Each transition is guarded by a persisted state change and ledger idempotency key so repeated processing does not duplicate credits or refunds.
+The Vercel cron job calls the protected `/api/cron/process` endpoint every five minutes. Set `CRON_SECRET` in Vercel so cron requests are authenticated; Vercel sends it as a bearer token. Financial state transitions are transactional and idempotent.
 
 ## Tests
 
@@ -40,16 +42,14 @@ The server processes expiries and maturities on startup and once per minute. Eac
 npm test
 ```
 
-Tests use isolated in-memory or temporary SQLite databases. The local database is not reset by the test suite.
+Tests use isolated PGlite databases. The configured local or hosted PostgreSQL database is not reset by the test suite.
 
-## Deploying a tester build to Render
+## Deploying a tester build to Vercel
 
-The root `render.yaml` configures the service to run the test suite during deployment, use `npm start`, store SQLite at `/var/data/users.db`, and answer Render health checks at `/healthz`.
+1. Push the repository to GitHub and import it into Vercel as a new project.
+2. Create a Neon Postgres project and copy its pooled connection string into Vercel's `DATABASE_URL` environment variable. Use the same variable locally only if you intend to use that Neon database; tests use isolated PGlite instead.
+3. Configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, and `EMAIL_FROM` in Vercel. Registration and password reset fail closed until SMTP verification succeeds.
+4. Configure a long random `CRON_SECRET` in Vercel. Set `ENORMICO_ADMIN_EMAIL` and `ENORMICO_ADMIN_PASSWORD` if you want to bootstrap a protected admin account. Add all values as Vercel environment variables; never commit them.
+5. Deploy and verify `/healthz`. Test signup and email verification, login, a simulated wallet deposit, a simulated investment, password reset, and logout. Confirm no real payment or payout is possible.
 
-1. Create a Git repository and push the project. Check `git status` before committing; `.env`, `users.db`, and SQLite journal files must not be included. If a database file was already staged, remove it from the index before committing.
-2. In Render, create a **Blueprint** and connect the repository. Keep the configured `starter` web-service plan: Render persistent disks require a paid web service.
-3. Before the first deploy, set the SMTP secrets (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD`, and `EMAIL_FROM`) in Render. Set `SMTP_PORT` and `SMTP_SECURE` to match the provider. Registration and password reset intentionally remain unavailable until SMTP verification succeeds.
-4. Set `ENORMICO_ADMIN_EMAIL` and `ENORMICO_ADMIN_PASSWORD` to bootstrap the first admin. Use a private, strong password. These values are secrets; do not put them in the Blueprint or Git.
-5. Wait for the deployment and `/healthz` check to pass. Use the Render URL to test signup and email verification, login, a simulated wallet deposit, a simulated investment, password reset, and logout. Confirm no real payment or payout is possible.
-
-The persistent disk keeps the SQLite database across deploys and restarts. Keep this app at one running instance: a local SQLite database on one disk is not a shared database for multiple instances. If the app needs horizontal scaling or higher availability, migrate persistence to a managed database before scaling. Back up user data before making schema or hosting changes.
+The Vercel function uses Neon for durable data; do not configure a local SQLite file or depend on function filesystem persistence. The existing local/Render data remains untouched and is not imported automatically. This product is a simulation only and must not accept real funds.

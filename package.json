@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Simulated pooled investment platform prototype",
-  "main": "user-api-sqlite.js",
+  "main": "index.js",
   "scripts": {
     "start": "node user-api-sqlite.js",
     "test": "node --test"
@@ -12,7 +12,11 @@
     "node": ">=22.5"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.1",
     "express": "^5.1.0",
     "nodemailer": "^10.1.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.17"
   }
 }
