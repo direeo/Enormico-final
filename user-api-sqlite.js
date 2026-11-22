@@ -11,8 +11,10 @@ const {
 } = require('./auth-utils');
 const { createEmailSender, missingEmailSettings, classifyEmailError } = require('./email-service');
 
-const envFile = path.join(__dirname, '.env');
-if (fs.existsSync(envFile) && typeof process.loadEnvFile === 'function') process.loadEnvFile(envFile);
+const envFile = ['.env', '.env.local']
+  .map(filename => path.join(__dirname, filename))
+  .find(filename => fs.existsSync(filename));
+if (envFile && typeof process.loadEnvFile === 'function') process.loadEnvFile(envFile);
 
 const PORT = Number(process.env.PORT || 3001);
 const SESSION_MS = 7 * DAY_MS;

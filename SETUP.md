@@ -18,6 +18,8 @@ npm start
 
 Set `DATABASE_URL` in `.env` to a PostgreSQL connection string before starting. Open <http://localhost:3001>. Do not open the HTML files directly; the pages use same-origin authenticated API calls. The server initializes the schema and seeds the five tiers on first start.
 
+If Neon CLI has pulled settings into `.env.local`, the app reads that file when `.env` is absent.
+
 The application does not automatically seed a wallet balance. Sign in and use **Add funds** in the wallet; all balances remain simulated.
 
 ## Email verification and password reset
@@ -39,6 +41,7 @@ The Vercel cron job calls the protected `/api/cron/process` endpoint every five 
 ## Tests
 
 ```powershell
+npm run build
 npm test
 ```
 
