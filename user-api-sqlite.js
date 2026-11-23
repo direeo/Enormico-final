@@ -155,6 +155,7 @@ function createApplication({ database = createDatabase(), initialEmailSender } =
   const ready = initializeDatabase(db).then(ensureConfiguredAdmin).then(verifyEmailTransport);
 
   app.disable('x-powered-by');
+  app.get('/favicon.ico', (req, res) => res.status(204).end());
   app.use(async (req, res, next) => {
     await ready;
     next();

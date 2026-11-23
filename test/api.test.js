@@ -66,6 +66,7 @@ test('PostgreSQL-backed API supports verified signup, password reset, and simula
   const health = await request(url, '/healthz');
   assert.equal(health.response.status, 200);
   assert.deepEqual(health.data, { status: 'ok' });
+  assert.equal((await fetch(`${url}/favicon.ico`)).status, 204);
   const landing = await fetch(`${url}/`);
   assert.equal(landing.status, 200);
   assert.match(await landing.text(), /Try the simulation/);
