@@ -573,6 +573,19 @@ app.use((error, req, res, next) => {
   res.status(status).json({ error: status >= 500 ? 'An internal error occurred.' : error.message });
 });
 
+return {
+  app, db, platform, ready, passwordHash, passwordMatches, runScheduledProcessing,
+  verifyEmailTransport,
+  setEmailSender(sender) {
+    emailSender = sender;
+    emailStatus = sender ? { state: 'verified' } : { state: 'unconfigured', missing: missingEmailSettings() };
+  },
+  getEmailStatus() { return { ...emailStatus, pid: process.pid }; },
+  authRateLimits,
+  resetRateLimits() { authRateLimits.clear(); loginAttempts.clear(); }
+};
+}
+
 if (require.main === module) {
   const application = createApplication();
   const { app, db, runScheduledProcessing } = application;
@@ -614,19 +627,6 @@ if (require.main === module) {
     db.close().catch(closeError => console.error('Database shutdown failed:', closeError));
     process.exitCode = 1;
   });
-}
-
-return {
-  app, db, platform, ready, passwordHash, passwordMatches, runScheduledProcessing,
-  verifyEmailTransport,
-  setEmailSender(sender) {
-    emailSender = sender;
-    emailStatus = sender ? { state: 'verified' } : { state: 'unconfigured', missing: missingEmailSettings() };
-  },
-  getEmailStatus() { return { ...emailStatus, pid: process.pid }; },
-  authRateLimits,
-  resetRateLimits() { authRateLimits.clear(); loginAttempts.clear(); }
-};
 }
 
 module.exports = { createApplication };
