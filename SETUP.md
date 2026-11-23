@@ -36,7 +36,7 @@ To bootstrap an administrator on first start, set both `ENORMICO_ADMIN_EMAIL` an
 
 The existing tiers retain their rates, ranges, and durations. A tier's initial pool target is its existing maximum; an administrator can adjust that target from the protected monitor. Pools expire after 14 days. A contribution that takes a pool to or above its target is accepted in full and activates the pool. ROI uses each investment's own total contribution and is rounded to the nearest whole naira. Maturity duration is measured as exact 24-hour days from pool activation.
 
-The Vercel cron job calls the protected `/api/cron/process` endpoint every five minutes. Set `CRON_SECRET` in Vercel so cron requests are authenticated; Vercel sends it as a bearer token. Financial state transitions are transactional and idempotent.
+The Vercel Hobby cron job calls the protected `/api/cron/process` endpoint once daily at midnight UTC. This can delay pool expiry and investment maturity processing by up to 24 hours. Set `CRON_SECRET` in Vercel so cron requests are authenticated; Vercel sends it as a bearer token. Financial state transitions are transactional and idempotent.
 
 ## Tests
 
